@@ -1,0 +1,30 @@
+# ── Web framework ──────────────────────────────────────────────────────────
+flask>=3.0
+
+# ── FastAPI layer (add when on Python ≤ 3.12 via pyenv) ───────────────────
+# fastapi
+# uvicorn[standard]
+# pydantic
+# pydantic-settings
+
+python-dotenv
+
+# ── Database ───────────────────────────────────────────────────────────────
+sqlalchemy>=2.0.36
+alembic>=1.13.1
+# psycopg2-binary           # Uncomment when connecting to PostgreSQL
+
+# ── NLP / time parsing ─────────────────────────────────────────────────────
+dateparser>=1.2.0
+
+# ── Messaging (Twilio) ─────────────────────────────────────────────────────
+# twilio                    # Uncomment when deploying webhook publicly
+
+# ── LLM parser layer ───────────────────────────────────────────────────────
+# anthropic                 # Uncomment when adding LLM intent fallback
+
+# ── Scheduling ─────────────────────────────────────────────────────────────
+# apscheduler               # Uncomment when adding daily summary cron
+
+# ── Testing ────────────────────────────────────────────────────────────────
+pytest>=8.0
