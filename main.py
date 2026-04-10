@@ -201,3 +201,30 @@ async def sms_webhook(From: str = Form(...), Body: str = Form(...), db: Session 
     twiml = MessagingResponse()
     twiml.message(final_msg)
     return Response(content=str(twiml), media_type="application/xml")
+    @app.get("/setup-database")
+def setup_database(db: Session = Depends(get_db)):
+    # 1. Create the Business
+    joe = Business(
+        name="Joe's Cuts",
+        phone="+15550001111", # You can change this to your Twilio number later
+        working_hours={
+            "monday": {"open": "09:00", "close": "17:00"},
+            "tuesday": {"open": "09:00", "close": "17:00"},
+            "wednesday": {"open": "09:00", "close": "17:00"},
+            "thursday": {"open": "09:00", "close": "17:00"},
+            "friday": {"open": "09:00", "close": "17:00"}
+        }
+    )
+    db.add(joe)
+    db.flush() # Get the ID
+    
+    # 2. Add a Service
+    haircut = Service(business_id=joe.id, name="Standard Haircut", duration_minutes=30)
+    db.add(haircut)
+    
+    # 3. Add an Employee
+    staff = Employee(business_id=joe.id, name="Joe", is_active=True)
+    db.add(staff)
+    
+    db.commit()
+    return {"message": "Joe's Cuts has been added to the database!"}
