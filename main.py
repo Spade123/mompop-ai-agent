@@ -200,8 +200,8 @@ async def sms_webhook(From: str = Form(...), Body: str = Form(...), db: Session 
 
     twiml = MessagingResponse()
     twiml.message(final_msg)
-    return Response(content=str(twiml), media_type="application/xml")
-    @app.get("/setup-database")
+    return Response(content=str(twiml), media_type="application/xml")    
+@app.get("/setup-database")
 def setup_database(db: Session = Depends(get_db)):
     # 1. Create the Business
     joe = Business(
